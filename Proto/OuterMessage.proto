@@ -1,0 +1,157 @@
+syntax = "proto3";
+package ETModel;
+
+message Actor_Test // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string Info = 1;
+}
+
+message Actor_TestRequest // IActorLocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string request = 1;
+}
+
+message Actor_TestResponse // IActorLocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string response = 1;
+}
+
+message Actor_TransferRequest // IActorLocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MapIndex = 1;
+}
+
+message Actor_TransferResponse // IActorLocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message C2G_EnterMap // IRequest
+{
+	int32 RpcId = 90;
+}
+
+message G2C_EnterMap // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 UnitId = 1;
+	int32 Count  = 2;
+}
+
+message UnitInfo
+{
+	int64 UnitId  = 1;
+	int32 X       = 2;
+	int32 Z       = 3;
+}
+
+message Actor_CreateUnits // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+    repeated UnitInfo Units = 1;
+}
+
+message Frame_ClickMap // IFrameMessage
+{
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int32 X = 1;
+	int32 Z = 2;
+}
+
+
+message C2R_Ping // IRequest
+{
+	int32 RpcId = 90;
+}
+
+message R2C_Ping // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message G2C_Test // IMessage
+{
+}
+
+message C2M_Reload // IRequest
+{
+	int32 RpcId = 90;
+	string Account = 1;
+	string Password = 2;
+}
+
+message M2C_Reload // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message CommandInput
+{
+	float AxisX = 1;
+	float AxisY = 2;
+}
+
+message CommandResult
+{
+	float Rotate = 1;
+	float Velocity = 2;
+}
+
+message Command
+{
+	uint32 Frame = 1;
+	uint32 Sequence = 2;
+	CommandInput Input = 3;
+	CommandResult Result = 4;
+}
+
+message Actor_ClientCommond // IActorLocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+    repeated Command Input = 1;
+}
+
+message Actor_ServerCommond // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+    repeated Command Result = 1;
+}
+
+message UnitStateInfo
+{
+	uint32 Frame = 1;
+	int64 UnitId = 2;
+	float PosX = 3;
+	float PosY = 4;
+	float PosZ = 5;
+	float Rotate = 6;
+	float Velocity = 7;
+}
+
+message Actor_StateSync // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+    repeated UnitStateInfo States = 1;
+}
